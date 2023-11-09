@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.styleFromGlobal {
+	color: red !important;
+}
+.greenmenu {
+	color: green;
+}
+.blackmenu {
+	color: black;
+}
