@@ -5,7 +5,6 @@ const NotFound = () => {
         <>
         <h1>{'This is From Root > Not Found.js'}</h1>
             {/*<h2>{"Testing for > error.jsx"}</h2>*/}
-
         </>
     );
 };
