@@ -24,7 +24,7 @@ const CSRComponent = () => {
 
             {data?.products?.map((item, index) => {
                 return (
-                    <h1>{item?.title}</h1>
+                    <h1 key={index}>{item?.title}</h1>
                 )
             })}
 
