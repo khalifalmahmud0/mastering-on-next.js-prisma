@@ -2,9 +2,11 @@ import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import {console} from "next/dist/compiled/@edge-runtime/primitives";
 export const GET = async (req, res) => {
+
 	// Way to get Query Params from Request
 	let { searchParams } = new URL(req.url);
 	let nameFromParamUrl = searchParams.get("name");
+
 	return NextResponse.json(
 		{
 			status: 200,
@@ -26,7 +28,7 @@ export const POST = async (req, res) => {
 
 	// Header Data
 	let headersData = headers();
-	console.log(headersData);
+	// console.log(headersData);
 	let name = headersData.get("name");
 
 	// Cookie
@@ -39,8 +41,13 @@ export const POST = async (req, res) => {
 			// body:bodyData,
 			// formData: company,
 			head: name,
-			cookie: cookiePractice.get('pass')
+			cookie: cookiePractice.get('age'),
+
 		},
-		{ status: 201 } // manual status code send
+		{ status: 201,
+			headers:{
+				'Set-Cookie': `country=bangladesh`
+			}
+		} // manual status code send
 	);
 };
