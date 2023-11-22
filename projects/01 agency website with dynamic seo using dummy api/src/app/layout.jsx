@@ -18,6 +18,8 @@ export default function RootLayout({children}) {
         <NextTopLoader
             color="#2299DD"
             showSpinner={false}
+            crawlSpeed={1}
+            speed={1}
         />
         {/*<NextTopLoader*/}
         {/*    // color="#2299DD"*/}
