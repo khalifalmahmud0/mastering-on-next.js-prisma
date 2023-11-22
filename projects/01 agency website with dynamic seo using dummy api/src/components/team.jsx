@@ -9,8 +9,8 @@ const Team = () => {
                     <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon
                         brooklyn asymmetrical gentrify, subway
                         tile poke farm-to-table. Franzen you
-                        {/* eslint-disable-next-line react/no-unescaped-entities */}
-                        probably haven't heard of them.</p>
+                      
+                        probably havent heard of them.</p>
                 </div>
                 <div className="flex flex-wrap -m-4">
                     <div className="p-4 lg:w-1/2">
