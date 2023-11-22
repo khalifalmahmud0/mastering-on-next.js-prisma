@@ -109,7 +109,7 @@ const Projects = () => {
                                 width={100}
                                 height={100}
                                 alt="gallery"
-                                class="absolute inset-0 w-full h-full object-cover object-center"
+                                className="absolute inset-0 w-full h-full object-cover object-center"
                                 src="https://dummyimage.com/606x366"
                             />
                             <div className="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">

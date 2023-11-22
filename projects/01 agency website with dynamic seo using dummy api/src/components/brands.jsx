@@ -126,7 +126,7 @@ const Brands = () => {
                                 width={100}
                                 height={100}
                                 alt="ecommerce"
-                                class="object-cover object-center w-full h-full block"
+                                className="object-cover object-center w-full h-full block"
                                 src="https://dummyimage.com/427x267"
                             />
                         </Link>
@@ -139,13 +139,13 @@ const Brands = () => {
                     <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
                         <Link
                             href={"/"}
-                            class="block relative h-48 rounded overflow-hidden"
+                            className="block relative h-48 rounded overflow-hidden"
                         >
                             <Image
                                 width={100}
                                 height={100}
                                 alt="ecommerce"
-                                class="object-cover object-center w-full h-full block"
+                                className="object-cover object-center w-full h-full block"
                                 src="https://dummyimage.com/428x268"
                             />
                         </Link>

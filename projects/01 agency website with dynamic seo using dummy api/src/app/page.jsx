@@ -18,7 +18,6 @@ export default function Home() {
             <Contact/>
             <Team/>
             <Testimonial/>
-
         </>
     );
 }
