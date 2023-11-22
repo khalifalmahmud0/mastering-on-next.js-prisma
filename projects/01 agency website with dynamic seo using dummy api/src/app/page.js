@@ -1,8 +1,9 @@
-import Image from "next/image";
+import Hero from "@/components/hero";
+
 export default function Home() {
-	return (
-		<>
-			<h1>Allah Is Almighty</h1>
-		</>
-	);
+    return (
+        <>
+            <Hero/>
+        </>
+    );
 }
