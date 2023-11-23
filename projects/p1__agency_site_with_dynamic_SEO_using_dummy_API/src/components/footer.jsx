@@ -1,8 +1,12 @@
 import Link from "next/link";
+import Contact from "@/components/contact";
 
 const Footer = () => {
     return (
         <>
+            <div className='mb-24'>
+                <Contact/>
+            </div>
             <footer className="text-gray-600 body-font">
                 <div className="bg-gray-100">
                     <div className="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">

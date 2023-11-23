@@ -2,10 +2,8 @@ import Link from "next/link";
 
 const menus = [
     {name: 'Home', path: '/'},
-    {name: 'About', path: '/about-us'},
     {name: 'Team', path: '/team'},
     {name: 'Projects', path: '/projects'},
-    {name: 'Contact', path: '/contact'},
 ];
 const Header = () => {
     return (
