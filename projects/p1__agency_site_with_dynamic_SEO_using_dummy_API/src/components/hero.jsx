@@ -1,17 +1,27 @@
 import Image from "next/image";
+const fetchData = async () => {
 
-const Hero = () => {
+    try {
+        let fetching = await fetch(process.env.API_URL+'HeroList');
+        return fetching.json();
+    } catch (e) {
+        throw new Error("Data Fetching Fail!");
+    }
+}
+const Hero = async () => {
+    let data = await fetchData();
     return (
         <section className="text-gray-600 body-font">
             <div className="container mx-auto flex px-5 md:flex-row flex-col items-center">
                 <div
                     className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-                    <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Knausgaard typewriter
-                                                                                                   readymade marfa</h1>
-                    <p className="mb-8 leading-relaxed">Chillwave portland ugh, knausgaard fam polaroid iPhone. Man
-                                                        braid swag typewriter affogato, hella selvage wolf narwhal
-                                                        dreamcatcher.</p>
-                    <p className="text-sm mt-2 text-gray-500 mb-8 w-full">Neutra shabby chic ramps, viral fixie.</p>
+                    {data?.title ?  <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
+                        {data?.title}
+                    </h1> : ''}
+                    {data?.description ?    <p className="mb-8 leading-relaxed">
+                        {data?.description}
+                    </p> : ''}
+
                     <div className="flex lg:flex-row md:flex-col">
                         <button
                             className="bg-gray-100 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
@@ -42,8 +52,10 @@ const Hero = () => {
                     </div>
                 </div>
                 <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-                    <Image width={700} height={100} className="object-cover object-center rounded" alt="hero"
-                           src="https://dummyimage.com/720x600"/>
+                    {/*src="https://dummyimage.com/720x600"*/}
+                    <Image width={720} height={600} className="object-cover object-center rounded" alt="hero"
+                        src={data?.image2 ? data?.image2 : `https://dummyimage.com/720x600`}
+                    />
                 </div>
             </div>
         </section>
