@@ -3,26 +3,29 @@ import nodemailer from "nodemailer";
 import {console} from "next/dist/compiled/@edge-runtime/primitives";
 
 export const POST = async (req,res) => {
-    let ContactInfo = await req.json();
-    let {name,email,message} = ContactInfo;
-
+    let {name,email,message} = await req.json();
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'gadgets.khalif@gmail.com',
-            pass: 'BlackDon251996'
+            user: 'techlabpro35@gmail.com',
+            pass: 'khalif12345'
         }
     });
     const mailOptions = {
-        from: 'Agency Website <gadgets.khalif@gmail.com> ',
+        from: 'Agency Website <techlabpro35@gmail.com> ',
         to: email,
         subject: `${name} - Email`,
         text: `${message}`,
-
     };
-    let result = await transporter.sendMail(mailOptions);
-    return NextResponse.json({
-        result,
-        status:'success'
-    });
+    try {
+        let result = await transporter.sendMail(mailOptions);
+        return NextResponse.json({
+            result,
+            status:'success'
+        });
+    }catch (e) {
+        return NextResponse.json({
+            status:'Fail'
+        });
+    }
 }
