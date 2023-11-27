@@ -1,7 +1,7 @@
 'use client'
 import {useState} from "react";
 import axios from "axios";
-
+import toast, { Toaster } from 'react-hot-toast';
 const Contact = () => {
     let [FormData,SetFormData] = useState({
         name:'', email:'', message:''
@@ -15,9 +15,33 @@ const Contact = () => {
 
     let submitForm = async (e) => {
         e.preventDefault();
-        console.log(FormData);
-        await axios.post('/api/contact',FormData);
-    }
+       if (FormData?.name?.length === 0) {
+            toast.error('Name Required');
+        } else if (FormData?.email?.length === 0) {
+            toast.error('Email Required');
+        } else if (FormData?.message?.length === 0) {
+            toast.error('Message Required');
+        } else {
+            await toast.promise(
+                axios.post('/api/contact', FormData),
+                {
+                    loading: 'Sending Email...',
+                    success: (responseData) => {
+                        if (responseData?.data?.status === 'success') {
+                            SetFormData({name:'', email:'', message:''})
+                            return 'Email Sent Successfully!';
+                        } else {
+                            throw new Error('Failed to Send Email. Try Again Later!!');
+                        }
+                    },
+                    error: 'Failed to Send Email. Try Again Later!',
+                }
+            );
+        }
+        }
+
+
+
     return (
         <section className="text-gray-600 body-font relative">
             <div className="container px-5 mx-auto flex sm:flex-nowrap flex-wrap">
@@ -102,6 +126,7 @@ const Contact = () => {
                         viral artisan.</p>
                 </div>
             </div>
+            <Toaster />
         </section>
     );
 };
