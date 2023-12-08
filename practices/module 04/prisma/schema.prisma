@@ -10,9 +10,63 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id    Int    @id @default(autoincrement())
-  email String @unique
-  name  String @db.VarChar(500)
-  roll  Int    @default(1000)
+model numbers {
+  id                   Int     @id @default(autoincrement())
+  // Signed Numbers
+  tiny_int             Int     @db.TinyInt
+  small_int            Int     @db.SmallInt
+  medium_int           Int     @db.MediumInt
+  default_int          Int
+  big_int              BigInt
+  // UnSigned Number
+  unsigned_tiny_int    Int     @db.UnsignedTinyInt
+  unsigned_small_int   Int     @db.UnsignedSmallInt
+  unsigned_medium_int  Int     @db.UnsignedMediumInt
+  unsigned_default_int Int     @db.UnsignedInt
+  unsigned_big_int     BigInt  @db.UnsignedBigInt
+  // Decimal
+  decimal_int          Decimal
+  // Float
+  double_float_int     Float
+  // Only Float 
+  only_float_int       Float   @db.Float
+  // Int With Default value And Unique Value 
+  default_unique_int   Int     @unique @default(96)
+}
+
+model strings {
+  id                    Int     @id @default(autoincrement())
+  //Strings
+  tiny_string           String  @db.TinyText
+  small_string          String  @db.Text
+  medium_string         String  @db.MediumText
+  default_string        String
+  big_string            String  @db.LongText
+  // Set Length 
+  string_length_varChar String  @db.VarChar(1000)
+  string_length_Char    String  @db.Char(200)
+  // Set Default Value 
+  string_default_value  String  @default("Khalif")
+  // Nullable String
+  nullable_string       String?
+}
+
+model booleans {
+  id          Int     @id @default(autoincrement())
+  // Boolean
+  trueORfalse Boolean
+}
+
+// BLOB = Binary Large Object 
+model blobAndBinary {
+  id            Int   @id @default(autoincrement())
+  tiny_blob     Bytes @db.TinyBlob
+  medium_blob   Bytes @db.MediumBlob
+  default_blob  Bytes @db.Blob
+  big_blob      Bytes @db.LongBlob
+  // Binary 
+  binary        Bytes @db.Binary(100)
+  varBinary     Bytes @db.VarBinary(100)
+  bit           Bytes @db.Bit(10)
+  defaultBinary Bytes @default("2356") @db.Blob
 }

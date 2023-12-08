@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE `user` ADD COLUMN `roll` INTEGER NOT NULL DEFAULT 1000;
