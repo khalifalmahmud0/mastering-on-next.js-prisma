@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// *****
+// Database For SALES MANAGEMENT SYSTEM 
+// *****
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id               BigInt             @id @default(autoincrement())
+  firstName        String
+  lastName         String
+  email            String             @unique
+  mobile           String
+  password         String
+  otp              String
+  categories       categories[]
+  products         products[]
+  customers        customers[]
+  invoice_products invoice_products[]
+  invoices         invoices[]
+  created_at       DateTime           @default(now()) @db.DateTime(0)
+  updated_at       DateTime           @default(now()) @updatedAt @db.DateTime(0)
+}
+
+model categories {
+  id         BigInt     @id @default(autoincrement())
+  name       String
+  products   products[]
+  user_id    BigInt
+  users      users      @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  created_at DateTime   @default(now()) @db.DateTime(0)
+  updated_at DateTime   @default(now()) @updatedAt @db.DateTime(0)
+}
+
+model products {
+  id               BigInt            @id @default(autoincrement())
+  user_id          BigInt
+  users            users             @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  category_id      BigInt
+  categories       categories        @relation(fields: [category_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  name             String
+  price            String
+  unit             String
+  img_url          String
+  invoice_products invoice_products?
+  created_at       DateTime          @default(now()) @db.DateTime(0)
+  updated_at       DateTime          @default(now()) @updatedAt @db.DateTime(0)
+}
+
+model customers {
+  id         BigInt     @id @default(autoincrement())
+  name       String
+  email      String
+  mobile     String
+  user_id    BigInt
+  users      users      @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  invoices   invoices[]
+  created_at DateTime   @default(now()) @db.DateTime(0)
+  updated_at DateTime   @default(now()) @updatedAt @db.DateTime(0)
+}
+
+model invoice_products {
+  id         BigInt   @id @default(autoincrement())
+  invoice_id BigInt
+  invoices   invoices @relation(fields: [invoice_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  product_id BigInt   @unique
+  products   products @relation(fields: [product_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  user_id    BigInt
+  users      users    @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  created_at DateTime @default(now()) @db.DateTime(0)
+  updated_at DateTime @default(now()) @updatedAt @db.DateTime(0)
+}
+
+model invoices {
+  id               BigInt             @id @default(autoincrement())
+  total            String
+  discount         String
+  vat              String
+  payable          String
+  user_id          BigInt
+  users            users              @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  customer_id      BigInt
+  customers        customers          @relation(fields: [customer_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  invoice_products invoice_products[]
+  created_at       DateTime           @default(now()) @db.DateTime(0)
+  updated_at       DateTime           @default(now()) @updatedAt @db.DateTime(0)
+}
